@@ -89,6 +89,16 @@ streamlit run 04_bert/api_streamlit.py # Web
 
 BERT 权重优先读本地 HuggingFace 缓存（`_resolve_bert_path()`），无网络时不会卡在联网检查上。
 
+## 相对基线版本的改动
+
+- **新增 Transformer 学生模型**：基线只有 BiLSTM 学生，补充 Transformer 版本对比蒸馏效果
+  （hidden-MSE 对齐 + 3 层投影）。
+- **新增 8 模型统一评估**：同一 `test.txt`、同一标签映射、统一 macro-F1，把 FastText 也纳入对比。
+- **新增 LLM 兜底链路**（基线完全没有）：低置信度样本调用通义千问二次分类，返回结果
+  `confidence=None`（LLM 无概率输出，不伪造置信度）；该能力封装为 LangChain Tool 供 Agent 调用。
+- **修正参数量口径**：学生模型实算 9.62M（含 embedding 5.41M），基线注释写的 0.7M 是投影层参数量。
+- **修正量化归因**：GPU-fp32 与 CPU-int8 延迟不可直接比较，已在 README 说明并列为待补实验。
+
 ## 已知限制
 
 - **FastText 的 Windows 路径坑**：fasttext 的 C++ 层打不开含中文的路径，模型文件放在
