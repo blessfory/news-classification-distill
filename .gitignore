@@ -1,0 +1,28 @@
+# 模型权重与序列化模型
+save_model/
+*/save_model/
+*.pkl
+*.bin
+*.npy
+*.onnx
+
+# 原始与预处理语料（约 80MB，可用脚本重新生成）
+00-data/data/train.txt
+00-data/data/dev.txt
+00-data/data/test.txt
+01_rf/data/
+02_xgb/data/
+03_fasttext/data/
+
+# 运行产物
+__pycache__/
+*.py[cod]
+logs/
+.vscode/
+.idea/
+.env
+
+# 个人文档（仅本地保留，不入库）
+简历_*.md
+个人规划.md
+06_对比总结/面试问题及答案.md
